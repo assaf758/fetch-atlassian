@@ -26,6 +26,12 @@ Re-run the same command to update to the latest version.
 git clone https://github.com/YOUR_GITHUB_USER/atlassian-access.git ~/.claude/skills/atlassian-access
 ```
 
+### Requirements
+
+- `curl` (for API calls)
+- `python3` (for JSON parsing)
+- `jq` (optional; required when credentials are stored in `~/.claude/settings.json` rather than environment variables, e.g. when the skill is used from other agents like pi)
+
 ## Configuration
 
 ### 1. Generate an Atlassian API token
@@ -179,9 +185,3 @@ Remove the entry (or set `enabledPlugins` back to `true`) to re-enable.
 | `parse_confluence.py` | Parses and formats Confluence page JSON |
 | `fetch_fields.py` | Writes custom field ID → name mappings to `custom_fields.json` |
 | `custom_fields.json` | Per-instance field name map and suppress list (not committed) |
-
-## Requirements
-
-- `curl` (for API calls)
-- `python3` (for JSON parsing)
-- `jq` (optional; required when credentials are stored in `~/.claude/settings.json` rather than environment variables, e.g. when the skill is used from other agents like pi)
