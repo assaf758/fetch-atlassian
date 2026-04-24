@@ -184,3 +184,4 @@ Remove the entry (or set `enabledPlugins` back to `true`) to re-enable.
 
 - `curl` (for API calls)
 - `python3` (for JSON parsing)
+- `jq` (optional; required when credentials are stored in `~/.claude/settings.json` rather than environment variables, e.g. when the skill is used from other agents like pi)

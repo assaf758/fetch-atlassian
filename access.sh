@@ -18,6 +18,18 @@ ARG3="${3}"
 ARG4="${4}"
 
 if [[ -z "${JIRA_EMAIL}" || -z "${JIRA_API_TOKEN}" || -z "${ATLASSIAN_SITE}" ]]; then
+  # Try to read from ~/.claude/settings.json
+  SETTINGS_FILE="${HOME}/.claude/settings.json"
+  if [[ -f "${SETTINGS_FILE}" ]]; then
+    if command -v jq >/dev/null 2>&1; then
+      JIRA_EMAIL=$(jq -r '.env.JIRA_EMAIL // empty' "${SETTINGS_FILE}")
+      JIRA_API_TOKEN=$(jq -r '.env.JIRA_API_TOKEN // empty' "${SETTINGS_FILE}")
+      ATLASSIAN_SITE=$(jq -r '.env.ATLASSIAN_SITE // empty' "${SETTINGS_FILE}")
+    fi
+  fi
+fi
+
+if [[ -z "${JIRA_EMAIL}" || -z "${JIRA_API_TOKEN}" || -z "${ATLASSIAN_SITE}" ]]; then
   echo "ERROR: JIRA_EMAIL, JIRA_API_TOKEN, and ATLASSIAN_SITE must be set"
   exit 1
 fi
